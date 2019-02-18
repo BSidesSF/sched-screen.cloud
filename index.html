@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>BSides SF Conference Monitor Displays</title>
+    <meta name="description" content="Monitor display standalone page for sched.com">
+    <meta name="viewport" content="width=device-width">
+
+    <link rel="stylesheet" id="stylesheet" href="//cdn.sched.co/monitors/web/css/main-dark.css?2">
+    <link href='//fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="//cdn.sched.co/monitors/web/css/fontello.css?1">
+    <link href="https://bsidessf2019.sched.com/favicon.png" rel="shortcut icon" type="image/png"/>
+
+    <script src="https://bsidessf2019.sched.com/monitors/vendor/modernizr/modernizr.js"></script>
+</head>
+
+<body id="schedorg-signage">
+    <div class="loading">Loading&#8230;</div>
+    <section class="wrapper" id="sessionsList">
+
+    </section>
+
+    <aside>
+        <i class="icon-cancel-circled"></i>
+        <h2>Settings</h2>
+        <h4>Venues</h4>
+        <form action="#" method="post" name="selectSource" id="selectSource">
+            <select name="room" id="venuesList"></select>
+        </form>
+        <h4>Color Scheme</h4>
+        <input type="radio" name="scheme" id="css-light" value="light" checked="checked" />
+        <label for="scheme">Light</label>
+        <input type="radio" name="scheme" id="css-dark" value="dark" />
+        <label for="scheme">Dark</label><br />
+    </aside>
+
+    <!-- Templates -->
+    <script id="sessionsTemplate" type="text/template">
+<% if (_.size(sessions) == 0) { %>
+                <div class="no_sessions">No upcoming sessions here.</div
+            <% } %>
+            <% _.each(sessions, function(session, index) { %>
+                <% if (index == 0 || sessions[index-1].start_date != session.start_date) { %>
+                    <% if (index == 0) { %>
+                        <ul class="sessions">
+                    <% }; %>
+                    <h2><i class="icon-calendar"></i><span id="date"><%= session.event_start_weekday %>, <%= session.event_start_month_short %>&nbsp;<%= session.event_start_day %></span></h2>
+                <% } %>
+                <li class="session">
+                    <div class="time <%= session.status %>"><%= session.event_start_time %> - <%= session.event_end_time %></div>
+                    <div class="name <%= session.status %>" style="background-color: <%= session.color %>;">
+                        <%= session.name %>
+                    </div>
+                    <% if (_.has(session, 'speakers') || _.has(session, 'artists') || _.has(session, 'exhibitors') || _.has(session, 'sponsors')) { %>
+                        <div class="speaker">
+                            <% if (session.display_venue) { %>
+                                <span class="venue">at <%= session.venue %>,&nbsp;</span>
+                            <% } %>
+                            with&nbsp;&mdash;&nbsp;
+                            <% if (_.has(session, 'speakers')) { %>
+                                <% _.each(session.speakers, function(speaker, index) { %>
+                                    <% if (index > 0) { %>
+                                        ,&nbsp;
+                                    <% } %>
+                                    <%= speaker.name %>
+                                <% }); %>
+                            <% } %>
+                            <% if (_.has(session, 'artists')) { %>
+                                <% _.each(session.artists, function(artist, index) { %>
+                                    <% if (index > 0 || (_.has(session, 'speakers') && session.speakers.length > 0)) { %>
+                                        ,&nbsp;
+                                    <% } %>
+                                    <%= artist.name %>
+                                <% }); %>
+                            <% } %>
+                            <% if (_.has(session, 'exhibitors')) { %>
+                                <% _.each(session.exhibitors, function(exhibitor, index) { %>
+                                    <% if (index > 0 || (_.has(session, 'speakers') && session.speakers.length > 0) || (_.has(session, 'artists') && session.artists.length > 0)) { %>
+                                        ,&nbsp;
+                                    <% } %>
+                                    <%= exhibitor.name %>
+                                <% }); %>
+                            <% } %>
+                            <% if (_.has(session, 'sponsors')) { %>
+                                <% _.each(session.sponsors, function(sponsor, index) { %>
+                                    <% if (index > 0 || (_.has(session, 'speakers') && session.speakers.length > 0) || (_.has(session, 'artists') && session.artists.length > 0) || (_.has(session, 'exhibitors') && session.exhibitors.length > 0)) { %>
+                                        ,&nbsp;
+                                    <% } %>
+                                    <%= sponsor.name %>
+                                <% }); %>
+                            <% } %>
+                        </div>
+                    <% } else { %>
+                        <div class="speaker">
+                            <% if (session.display_venue) { %>
+                                <span class="venue">at <%= session.venue %></span>
+                            <% } %>
+                        </div>
+                    <% } %>
+                </li>
+                <% if (sessions.length == session) { %>
+                    </ul>
+                <% } %>
+            <% }); %>
+    </script>
+
+    <script id="venuesTemplate" type="text/template">
+<option value="global">Global</option>
+            <% _.each(venues, function(venue) { %>
+                <option value="<%= venue.id %>"><%= venue.name %></option>
+            <% }); %>
+    </script>
+
+    <!-- Load required JS files -->
+    <script src="https://bsidessf2019.sched.com/monitors/vendor/jquery/dist/jquery.min.js"></script>
+    <script src="https://bsidessf2019.sched.com/monitors/vendor/underscore/underscore.js"></script>
+    <script src="https://bsidessf2019.sched.com/monitors/vendor/backbone/backbone.js"></script>
+    <script src="https://bsidessf2019.sched.com/monitors/vendor/moment/min/moment.min.js"></script>
+    <script src="https://bsidessf2019.sched.com/monitors/vendor/moment-timezone/builds/moment-timezone-with-data.min.js"></script>
+    <script src="https://bsidessf2019.sched.com/monitors/js/plugins.js"></script>
+    <script src="https://bsidessf2019.sched.com/monitors/js/ui.js"></script>
+    <link rel="stylesheet" id="stylesheet" href="style.css">
+    <script src="app.js"></script>
+</body>
+</html>
+
