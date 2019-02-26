@@ -8,7 +8,7 @@ Serve these files from a NGINX web server with the following in the NGINX config
 ```
 # this proxies API calls to sched
 location ~/bsidessf/sched/(.*)$ {
-	proxy_pass https://bsidessf2019.sched.com/$1;
+	proxy_pass https://bsidessf2019.sched.com/$1$is_args$args;
 	proxy_set_header Host bsidessf2019.sched.com;
 	#add_header 'Access-Control-Allow-Origin' '*';
 	#add_header 'X-Frame-Options' '';
