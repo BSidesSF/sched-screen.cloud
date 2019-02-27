@@ -5,6 +5,8 @@ var limit = 200;
 var venueList = "global";
 
 var venueFilter = ["City View", "IMAX", "Theater 13", "Theater 14"];
+var startDate = moment("2019-03-03");
+var maxDisplayLength = moment.duration(3.5, 'hours');
 
 console.debug = console.log;
 
@@ -31,14 +33,31 @@ console.debug = console.log;
     model: Session,
       // allow for filtering sessions to display
       inVenues: function(venues) {
-          //return this;
         var filtered = this.filter(function(session) {
             var v = session.get("venue");
-            var keep = venues.indexOf(v) > -1;
+            var keep = venues.includes(v);
             return keep;
         });
         return new SessionsCollection(filtered);
-      }
+      },
+      shorterThan: function(maxDuration) {
+        var filtered = this.filter(function(session) {
+            var start = moment(session.get("event_start"));
+            var end = moment(session.get("event_end"));
+            var duration = moment.duration(end.diff(start));
+            return maxDuration  >= duration;
+        });
+        return new SessionsCollection(filtered);
+      },
+      startsAfter: function(startMoment) {
+        var filtered = this.filter(function(session) {
+            //console.log("session:", session);
+            var start = moment(session.get("event_start"));
+            return startMoment <= start;
+        });
+        return new SessionsCollection(filtered);
+      },
+
   });
 
   // Views
@@ -54,7 +73,7 @@ console.debug = console.log;
     render: function(){
       console.debug("rendering sessions");
       this.$el.html(this.template({
-        sessions: this.collection.inVenues(venueFilter).toJSON()
+        sessions: this.collection.startsAfter(startDate).shorterThan(maxDisplayLength).toJSON()
       }));
     }
   });
@@ -118,7 +137,7 @@ console.debug = console.log;
     return sessionsCollection.fetch({
       success: function(collection, response, options) {
           // filter sessions here!
-        sessionsCollection = collection.inVenues(venueFilter);
+        sessionsCollection = collection;
         sessionsView.render();
         $('.loading').hide();
         console.debug("sessions:", collection);
