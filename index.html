@@ -34,7 +34,7 @@
                     <% if (index == 0) { %>
                         <ul class="sessions">
                     <% }; %>
-                    <h2><i class="icon-calendar"></i><span id="date"><%= session.event_start_weekday %>, <%= session.event_start_month_short %>&nbsp;<%= session.event_start_day %></span></h2>
+                    <h2 class="date-title"><i class="icon-calendar"></i><span id="date"><%= session.event_start_weekday %>, <%= session.event_start_month_short %>&nbsp;<%= session.event_start_day %></span></h2>
                 <% } %>
                 <li class="session">
                     <div class="time <%= session.status %>"><%= session.event_start_time %> - <%= session.event_end_time %></div>
