@@ -1,6 +1,12 @@
 //var baseURL = "https://bsidessf2019.sched.com";
 var baseURL = "/bsidessf/sched";
-var limit = 20;
+var limit = 200;
+
+var venueList = "global";
+
+var venueFilter = ["City View", "IMAX", "Theater 13", "Theater 14"];
+
+console.debug = console.log;
 
 // Self-executing wrapper
 (function($){
@@ -20,10 +26,19 @@ var limit = 20;
 
   var SessionsCollection = Backbone.Collection.extend({
     url: function(){
-      console.debug($('#venuesList').val());
-      return baseURL+'/monitors/api/sessions/' + $('#venuesList').val() + '?limit=' + limit;
+      return baseURL+'/monitors/api/sessions/' + venueList + '?limit=' + limit;
     },
-    model: Session
+    model: Session,
+      // allow for filtering sessions to display
+      inVenues: function(venues) {
+          //return this;
+        var filtered = this.filter(function(session) {
+            var v = session.get("venue");
+            var keep = venues.indexOf(v) > -1;
+            return keep;
+        });
+        return new SessionsCollection(filtered);
+      }
   });
 
   // Views
@@ -39,25 +54,7 @@ var limit = 20;
     render: function(){
       console.debug("rendering sessions");
       this.$el.html(this.template({
-        sessions: this.collection.toJSON()
-      }));
-    }
-  });
-
-  var VenuesView = Backbone.View.extend({
-    el: '#venuesList',
-
-    template: _.template( $('#venuesTemplate').html()),
-
-    initialize: function(){
-      _.bindAll(this, "render"); // make sure 'this' refers to this View in the success callback below
-      this.render;
-    },
-
-    render: function(){
-      console.debug("rendering venues");
-      this.$el.html(this.template({
-       venues: this.collection.toJSON()
+        sessions: this.collection.inVenues(venueFilter).toJSON()
       }));
     }
   });
@@ -81,7 +78,6 @@ var limit = 20;
   var sessionsCollection = new SessionsCollection();
 
   var eventView = new EventView({ model: event });
-  var venuesView = new VenuesView({ collection: venuesCollection });
   var sessionsView = new SessionsView({ collection: sessionsCollection });
 
   // Sync
@@ -105,8 +101,7 @@ var limit = 20;
       success: function(collection, response, options) {
         var selectedVenueIndex = $('#venuesList option:selected').val();
         venuesCollection = collection;
-        venuesView.render();
-
+        console.debug("venues:", collection);
         if (selectedVenueIndex !== undefined) {
           $('#venuesList').val(selectedVenueIndex).prop('selected', true);
         }
@@ -122,9 +117,11 @@ var limit = 20;
     $('.loading').show();
     return sessionsCollection.fetch({
       success: function(collection, response, options) {
-        sessionsCollection = collection;
+          // filter sessions here!
+        sessionsCollection = collection.inVenues(venueFilter);
         sessionsView.render();
         $('.loading').hide();
+        console.debug("sessions:", collection);
       },
       error: function(collection, response, options) {
         console.debug("Sessions: Failed loading results from API");
@@ -132,13 +129,6 @@ var limit = 20;
       },
     });
   }
-
-  // Events
-
-  $('#venuesList').on('change', function() {
-    fetchSessions();
-    $('#room-name').html($('#venuesList option:selected').text());
-  });
 
   // Determine the pervious, current, and next 3 events for the current venue
   // function filterSessionsForDisplay() {
@@ -182,20 +172,7 @@ var limit = 20;
     .fail(function() {
       console.debug("Oops! Something's not right!");
     });
-  }, 60000);
+  }, 60000) // every 1 minute;
 
-  function getUrlParameter(sParam)
-  {
-      var sPageURL = window.location.search.substring(1);
-      var sURLVariables = sPageURL.split('&');
-      for (var i = 0; i < sURLVariables.length; i++)
-      {
-          var sParameterName = sURLVariables[i].split('=');
-          if (sParameterName[0] == sParam)
-          {
-              return sParameterName[1];
-          }
-      }
-  }
 })(jQuery);
 

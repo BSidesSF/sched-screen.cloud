@@ -24,20 +24,6 @@
 
     </section>
 
-    <aside>
-        <i class="icon-cancel-circled"></i>
-        <h2>Settings</h2>
-        <h4>Venues</h4>
-        <form action="#" method="post" name="selectSource" id="selectSource">
-            <select name="room" id="venuesList"></select>
-        </form>
-        <h4>Color Scheme</h4>
-        <input type="radio" name="scheme" id="css-light" value="light" checked="checked" />
-        <label for="scheme">Light</label>
-        <input type="radio" name="scheme" id="css-dark" value="dark" />
-        <label for="scheme">Dark</label><br />
-    </aside>
-
     <!-- Templates -->
     <script id="sessionsTemplate" type="text/template">
 <% if (_.size(sessions) == 0) { %>
@@ -105,13 +91,6 @@
                 <% if (sessions.length == session) { %>
                     </ul>
                 <% } %>
-            <% }); %>
-    </script>
-
-    <script id="venuesTemplate" type="text/template">
-<option value="global">Global</option>
-            <% _.each(venues, function(venue) { %>
-                <option value="<%= venue.id %>"><%= venue.name %></option>
             <% }); %>
     </script>
 
