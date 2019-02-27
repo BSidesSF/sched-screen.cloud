@@ -78,7 +78,7 @@ console.debug = console.log;
 
     // Sync
     function fetchSessions() {
-        $('.loading').show();
+        //$('.loading').show();
         return sessionsCollection.fetch({
             success: function(collection, response, options) {
                 // filter sessions here!
