@@ -7,3 +7,6 @@ html {
 body {
     background: #000000;
 }
+ul.sessions > li div.speaker {
+    background-color: #000000;
+}
