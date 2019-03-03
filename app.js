@@ -5,7 +5,7 @@ var limit = 200;
 var venueList = "global";
 
 var venueFilter = ["City View", "IMAX", "Theater 13", "Theater 14"];
-var startDate = moment("2019-03-03");
+//var startDate = moment("2019-03-03");
 var maxDisplayLength = moment.duration(3.5, 'hours');
 
 console.debug = console.log;
@@ -64,6 +64,7 @@ console.debug = console.log;
 
         render: function(){
             console.debug("rendering sessions");
+            var startDate = moment();
             this.$el.html(this.template({
                 sessions: this.collection.startsAfter(startDate).shorterThan(maxDisplayLength).toJSON()
             }));
