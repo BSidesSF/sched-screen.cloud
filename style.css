@@ -4,3 +4,6 @@ html {
 .name {
     cursor: auto;
 }
+body {
+    background: #000000;
+}
