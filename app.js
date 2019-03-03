@@ -50,6 +50,15 @@ console.debug = console.log;
             });
             return new SessionsCollection(filtered);
         },
+        endsAfter: function(endMoment) {
+            var filtered = this.filter(function(session) {
+                //console.log("session:", session);
+                var end = moment(session.get("event_end"));
+                return endMoment <= end;
+            });
+            return new SessionsCollection(filtered);
+        },
+
     });
 
     // Views
@@ -66,7 +75,7 @@ console.debug = console.log;
             console.debug("rendering sessions");
             var startDate = moment();
             this.$el.html(this.template({
-                sessions: this.collection.startsAfter(startDate).shorterThan(maxDisplayLength).toJSON()
+                sessions: this.collection.endsAfter(startDate).shorterThan(maxDisplayLength).toJSON()
             }));
             hideOverflow();
         }
