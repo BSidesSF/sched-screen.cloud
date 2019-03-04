@@ -10,3 +10,6 @@ body {
 ul.sessions > li div.speaker {
     background-color: #000000;
 }
+ul.sessions > li div.speaker > span.venue {
+    background-color: #000000;
+}
