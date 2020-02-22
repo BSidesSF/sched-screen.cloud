@@ -5,11 +5,18 @@ html {
     cursor: auto;
 }
 body {
-    background: #000000;
+    background-color: #f6e7ba;
+    color: #d5532d;
+}
+h2 {
+    color: #d5532d;
+}
+ul.sessions > li div.time {
+    color: #d5532d;
 }
 ul.sessions > li div.speaker {
-    background-color: #000000;
+    background-color: #f6e7ba;
 }
 ul.sessions > li div.speaker > span.venue {
-    background-color: #000000;
+    background-color: #f6e7ba;
 }

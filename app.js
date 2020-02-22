@@ -1,10 +1,10 @@
-//var baseURL = "https://bsidessf2019.sched.com";
+//var baseURL = "https://bsidessf2020.sched.com";
 var baseURL = "/bsidessf/sched";
 var limit = 200;
 
 var venueList = "global";
 
-var venueFilter = ["City View", "IMAX", "Theater 13", "Theater 14"];
+var venueFilter = ["Embarcadero", "Theater 16 (IMAX)", "Theater 14", "Theater 15"];
 //var startDate = moment("2019-03-03");
 var maxDisplayLength = moment.duration(3.5, 'hours');
 
@@ -75,7 +75,7 @@ console.debug = console.log;
             console.debug("rendering sessions");
             var startDate = moment();
             this.$el.html(this.template({
-                sessions: this.collection.endsAfter(startDate).shorterThan(maxDisplayLength).toJSON()
+                sessions: this.collection.endsAfter(startDate).shorterThan(maxDisplayLength).inVenues(venueFilter).toJSON()
             }));
             hideOverflow();
         }
