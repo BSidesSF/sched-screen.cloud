@@ -1,0 +1,498 @@
+
+
+
+
+
+
+
+<!DOCTYPE html>
+
+
+
+<html lang="en" class="no-js" manifest="https://events.qwikcast.tv:443/QC4.manifest?eventPageId=25370" style="background-color: #FFFFFF;">
+
+<head>
+
+    <meta charset="utf-8" />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+    <meta name="viewport" content="width=device-width" />
+
+
+
+    <title>Registration Page</title>
+
+
+    <script src="https://events.qwikcast.tv/public/bundles/jquery?v=EEZBCVzQe1TpkEUeLfjEm53wpuqSSXGjiXFWAVaewp81"></script>
+    <script src="https://events.qwikcast.tv/public/bundles/jqueryval?v=vYbr-3ljCYjg2jHwbJx9Mf2pxLtJnYWhypxESEKxYw41"></script>
+    <script src="https://events.qwikcast.tv/public/bundles/jqueryui?v=aN5cVpmZzP009bxKo05eoJnC1i-MF8KnLvUYJkngBwI1"></script>
+    <script src="https://events.qwikcast.tv/public/bundles/modernizr?v=VlAt0WRg4cRiwz_b6Ar748hZMzqN7NGsIPGkBI6YtP41"></script>
+    <link href="https://events.qwikcast.tv/public/Content/themes/base/partialpageBundle?v=JUzUiSG352-R7uaq9bAv9QWz3UO_Mxc6HZVuMup19uU1" rel="stylesheet"/>
+    <link href="https://events.qwikcast.tv/public/Content/groundworkBundle?v=7Mb9UeR2WPmAvlF6O_-SNMhh8XeRCPNg_TK19VinoQs1" rel="stylesheet"/>
+    <link href="https://events.qwikcast.tv/public/Content/SiteBundle?v=F1wConqi7L0tMJEGlmu-xv7I_uEWgK7ZAnMcpgcZVAM1" rel="stylesheet"/>
+    <script src="https://events.qwikcast.tv/public/jwplayer/jwplayer.js"></script>
+<script src="https://events.qwikcast.tv/public/jwplayer/jwplayerlicense.js"></script>
+<script src="https://events.qwikcast.tv/public/jwplayer/jwplayerbody.js"></script>
+
+
+
+
+
+    <script>
+
+        (function ($) {
+
+            $.validator.unobtrusive.addValidation = function (selector) {
+
+                //get the relevant form 
+
+                var form = $(selector);
+
+                // delete validator in case someone called form.validate()
+
+                $(form).removeData("validator");
+
+                $.validator.unobtrusive.parse(form);
+
+            };
+
+        }
+
+        )($);
+
+        //function formValuesSaved(data) {
+
+        //    alert("sucess");
+
+        //}
+
+
+
+    </script>
+
+
+
+    <script>
+
+        function navigateToPage(url) {
+
+            window.location = url;
+
+        }
+
+    </script>
+
+    <script type="text/javascript">
+
+
+
+        function logEvent(event) {
+
+            console.log(event.type);
+
+        }
+
+
+
+        window.applicationCache.addEventListener('checking', logEvent, false);
+
+        window.applicationCache.addEventListener('noupdate', logEvent, false);
+
+        window.applicationCache.addEventListener('downloading', logEvent, false);
+
+        window.applicationCache.addEventListener('cached', logEvent, false);
+
+        window.applicationCache.addEventListener('updateready', logEvent, false);
+
+        window.applicationCache.addEventListener('obsolete', logEvent, false);
+
+        window.applicationCache.addEventListener('error', logEvent, false);
+
+
+
+    </script>
+
+
+
+</head>
+
+<body style="background-color: transparent;color: #000000;font-size: 12pt;font-family: Arial;">
+
+    <div class="container">
+
+        <div class="row"><div class="three thirds area" data-layoutAreaId="1"><div class='row'>
+
+<p><span style="font-size:16px;">&nbsp;Bsides SF 2020&nbsp;</span><font size="3">Theater 15 Live Feed</font></p>
+
+</div>
+
+</div></div><div class="row"><div class="three thirds area" data-layoutAreaId="2"><div class='row'>
+
+<input data-val="true" data-val-number="The field UserEventVideoSessionId must be a number." data-val-required="The UserEventVideoSessionId field is required." id="sessionId18489" name="UserEventVideoSessionId" type="hidden" value="0" />
+
+<input data-val="true" data-val-number="The field EventVideoId must be a number." data-val-required="The EventVideoId field is required." id="videoId18489" name="EventVideoId" type="hidden" value="18489" />
+
+<div id="error-message18489" style="display: none">
+
+    <p id="message-paragraph18489">
+
+    </p>
+
+</div>
+
+
+
+<div id="titleDiv18489"></div>
+
+
+
+<div id="playerDiv18489"></div>
+
+<div id="chapterDiv18489" style="display: none;">
+
+    <select id="chapterDropDown18489" onchange="chapterChanged('18489');">
+
+        <option value="0" data-timecode="0">Choose a Chapter</option>
+
+    </select>
+
+</div>
+
+
+
+<div id="countdownDiv18489"></div>
+
+
+
+<script type="text/javascript">
+
+    window.addEventListener('load', function() {
+
+        var statsUrl;
+
+        if ("true" == "true") {
+
+            statsUrl = 'https://events.qwikcast.tv/public/QwikCast/StartSession?eventVideoId=18489';
+
+        } else {
+
+            statsUrl = '/Admin/PageEditor/StartSession?eventVideoId=18489';
+
+        }
+
+        $.post(statsUrl, function(data) {
+
+            $("#sessionId18489").val(data);
+
+        });
+
+        updateEndSession();
+
+    });
+
+
+
+    
+
+
+
+    function updateEndSession() {
+
+        var statsUrl;
+
+        if ("true" == "true") {
+
+            statsUrl = 'https://events.qwikcast.tv/public/QwikCast/EndSession?userEventVideoSessionId=' + $("#sessionId18489").val();
+
+        } else {
+
+            statsUrl = '/Admin/PageEditor/EndSession?userEventVideoSessionId=' + $("#sessionId18489").val();
+
+        }
+
+        $.post(statsUrl, function(data) {
+
+
+
+        });
+
+
+
+        setTimeout(function () {
+
+            updateEndSession();
+
+        }, 60000);
+
+    }
+
+
+
+    $(function () {
+
+        $('#chapterDiv').hide();
+
+    });
+
+
+
+    displayError = function (message, video) {
+
+        var url = "https://events.qwikcast.tv/public/Message/GetLocalizedErrorMessage";
+
+        var language = $("meta[name='accept-language']").attr("content");
+
+        var jqxhr = $.ajax({
+
+            url: url,
+
+            type: 'POST',
+
+            dataType: "json",
+
+            contentType: "application/json; charset=utf-8",
+
+            data: BuildJsonErrorMessageModel(message, language),
+
+            success: function (data) {
+
+                $('#message-paragraph' + video.EventVideoId).html(data.TranslatedMessage);
+
+                $('#error-message' + video.EventVideoId).dialog({
+
+                    modal: true,
+
+                    title: data.TranslatedTitle,
+
+                    buttons: {
+
+                        Ok: function () {
+
+                            $(this).dialog("close");
+
+                        }
+
+                    }
+
+                });
+
+            }
+
+        })
+
+            .fail(function (jqXHR, textStatus, errorThrown) {
+
+                if (errorThrown == "Unauthorized") {
+
+                    if (video.IsProd) {
+
+                        window.location = "https://events.qwikcast.tv/public/QwikCast/QwikCastEvent?eventKey=" + video.EventKey;
+
+                    } else {
+
+                        window.location = "/Admin/PageEditor/Preview?eventKey=" + video.EventKey + "&tempEventPageId=" + video.EventPageId;
+
+                    }
+
+                }
+
+            });
+
+    };
+
+
+
+</script>
+
+
+
+
+
+</div>
+
+</div></div><div class="row"><div class="three thirds area" data-layoutAreaId="3"></div></div>
+
+    </div>
+
+    <script src="https://events.qwikcast.tv/public/bundles/groundwork?v=hc-lRzA4TqHktwaS-uBeAFGOCnzkwFsIgPwrT_ZxpW81"></script>
+
+
+
+    <!-- Piwik -->
+
+<script type="text/javascript">
+
+  var _paq = _paq || [];
+
+  _paq.push(['trackPageView']);
+
+  _paq.push(['enableLinkTracking']);
+
+  (function() {
+
+    var u=(("https:" == document.location.protocol) ? "https" : "http") + "://piwik.qwikcast.tv/";
+
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+
+    _paq.push(['setSiteId', 2]);
+
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0]; g.type='text/javascript';
+
+    g.defer=true; g.async=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+
+  })();
+
+</script>
+
+<noscript><p><img src="http://piwik.qwikcast.tv/piwik.php?idsite=2" style="border:0;" alt="" /></p></noscript>
+
+<!-- End Piwik Code -->
+
+
+
+<!-- hi brett -->
+
+<script>
+
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+
+
+  ga('create', 'UA-71557824-2', 'auto');
+
+  ga('send', 'pageview');
+
+
+
+</script>
+
+    <script type="text/javascript">
+
+        var initialized = false;
+
+        $(function () {
+
+            var videos = [{"EventLocation":"https://d3r6ea4y0fvbg0.cloudfront.net/CDN_Ingest/BSidesSF-t15/Playlist.m3u8","StartDateTime":"\/Date(1582417860000)\/","ServerDateTime":"\/Date(1582571242121)\/","RecalibrationCount":60,"EventName":"BSides+Theater+15","IsProd":false,"EventVideoId":18489,"EventChapterId":0,"UserEventVideoSessionId":0,"Height":null,"Width":"100%","EventKey":"92c30585-cf1e-45bb-99ab-8c160c57d25b","EventPageId":25370,"CloseCaptionLocation":"","StartTimeCode":null,"EndTimeCode":null,"Chapters":[],"ChapterFileLocation":"","ThumbnailFileLocation":"","VideoType":"VOD","PlayerType":"JWPlayer","AutoStart":true,"CustomParameters":null,"PingVideoInterval":60000}];
+
+            $.each(videos, function (index, modelVideo) {
+
+                var url =
+
+                    "https://events.qwikcast.tv/public/QwikCast/RecalibrateServerDateTime";
+
+                if (modelVideo.PlayerType === "JWPlayer") {
+
+                    startCountDownJWPlayer(modelVideo, url);
+
+                }
+
+                if (modelVideo.PlayerType === "JWPlayer6") {
+
+                    startCountDownJWPlayer(modelVideo, url);
+
+                }
+
+                if (modelVideo.PlayerType === "JWPlayer7") {
+
+                    startCountDownJWPlayer(modelVideo, url);
+
+                }
+
+                if (modelVideo.PlayerType === "VLCPlayer") {
+
+                    startCountDownVLCPlayer(modelVideo, url);
+
+                }
+
+            });
+
+            var interval = parseInt('60000');
+
+            var sessionId = parseInt('1166610');
+
+            var eventId = parseInt('19020');
+
+
+
+            var cookie = getCookie("qc4SessionId" + eventId);
+
+            if (cookie != undefined && cookie.length>0) {
+
+                sessionId = getCookie("qc4SessionId" + eventId);
+
+            }
+
+
+
+            if (interval > 0 && sessionId > 0 && eventId > 0) {
+
+                
+
+                //create session cookie
+
+                document.cookie += "qc4SessionId" + eventId + "=" + sessionId + ";";
+
+
+
+                setTimeout(function () {
+
+                    updateSession(sessionId, interval);
+
+                }, interval);
+
+            }
+
+        });
+
+        function updateSession(sessionId,  interval) {
+
+            var url = "https://events.qwikcast.tv/public/QwikCast/UpdateEventSession";
+
+            $.post(url, { userEventSessionId: sessionId }, function (data) {
+
+                if (data != null) {
+
+                    //Add error handling
+
+                }
+
+            }, "json");
+
+           
+
+             setTimeout(function () {
+
+                updateSession(sessionId, interval);
+
+            }, interval);
+
+        }
+
+
+
+        function getCookie(name) {
+
+            var value = "; " + document.cookie;
+
+            var parts = value.split("; " + name + "=");
+
+            if (parts.length == 2) return parts.pop().split(";").shift();
+
+        }
+
+    </script>
+
+    
+
+</body>
+
+</html>
+
+
