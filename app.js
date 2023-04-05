@@ -1,11 +1,11 @@
-//var baseURL = "https://bsidessf2020.sched.com";
-var baseURL = "/bsidessf/sched";
+//var baseURL = "https://bsidessf2023.sched.com";
+var baseURL = "/bs/sched";
 var limit = 200;
 
 var venueList = "global";
 
-var venueFilter = ["Embarcadero", "Theater 16 (IMAX)", "Theater 14", "Theater 15"];
-//var startDate = moment("2019-03-03");
+var venueFilter = ["AMC Theatre 10", "AMC Theatre 12", "AMC Theatre 13", "AMC Theater 14", "AMC Theater 15"];
+//var startDate = moment("2023-04-23");
 var maxDisplayLength = moment.duration(3.5, 'hours');
 
 console.debug = console.log;
@@ -74,6 +74,8 @@ console.debug = console.log;
         render: function(){
             console.debug("rendering sessions");
             var startDate = moment();
+            //startDate = moment("2023-04-23");
+            console.debug("using startdate:", startDate.format());
             this.$el.html(this.template({
                 sessions: this.collection.endsAfter(startDate).shorterThan(maxDisplayLength).inVenues(venueFilter).toJSON()
             }));
@@ -108,7 +110,7 @@ console.debug = console.log;
     jQuery.expr.filters.offscreen = function(el) {
         var rect = el.getBoundingClientRect();
         return (
-            (rect.x + rect.width) < 0 
+            (rect.x + rect.width) < 0
             || (rect.y + rect.height) < 0
             || (rect.x > window.innerWidth || rect.y + rect.height > window.innerHeight)
         );
