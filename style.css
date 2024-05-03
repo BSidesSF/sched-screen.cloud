@@ -9,16 +9,16 @@ body {
     color: white;
 }
 h2 {
-    color: #EC008C;
+    color: #be202e; /* red */
 }
 ul.sessions > li div.time {
-    color: #00AEEF;
+    color: #d0cbc0; /* white */
 }
 ul.sessions > li div.speaker {
     background-color: #000000;
-    color: #00AEEF;
+    color: #d0cbc0; /* white */
 }
 ul.sessions > li div.speaker > span.venue {
     background-color: #000000;
-    color: #EC008C;
+    color: #be202e; /* red */
 }
