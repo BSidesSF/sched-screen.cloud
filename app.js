@@ -4,7 +4,7 @@ var limit = 200;
 
 var venueList = "global";
 
-var venueFilter = ["AMC Theatre 10", "AMC Theatre 12", "AMC Theatre 13", "AMC Theatre 14", "AMC Theatre 15", "Après Village (Embarcadero)"];
+var venueFilter = ["AMC Theatre 11", "AMC Theatre 12", "AMC Theatre 13", "AMC Theatre 14", "AMC Theatre 15", "AMC Theatre 9"];
 //var startDate = moment("2023-04-23");
 var maxDisplayLength = moment.duration(3.5, 'hours');
 
