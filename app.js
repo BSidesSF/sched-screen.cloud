@@ -84,6 +84,15 @@ var currentDay = moment().format("YYYY-MM-DD");
       var startDate = moment();
       //startDate = moment("2023-04-23");
       console.debug("using startdate:", startDate.format());
+      // Fix session colors that are invisible against the dark background.
+      // sched.co assigns #000000 to Presentations and "transparent" to Remarks,
+      // both of which disappear on our black body. Replace with a visible dark color.
+      this.collection.each(function(session) {
+        var color = session.get("color");
+        if (color === "#000000" || color === "transparent") {
+          session.set("color", "#1a1a2e");
+        }
+      });
       this.$el.html(this.template({
         sessions: this.collection.endsAfter(startDate).shorterThan(maxDisplayLength).ofTypes(eventTypeFilter).toJSON()
       }));

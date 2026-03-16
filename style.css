@@ -8,34 +8,57 @@
 html {
   overflow: hidden;
 }
-.name {
-  cursor: auto;
-}
 body {
   background-color: #000000;
   color: white;
+  padding-bottom: 0 !important;       /* remove sched.co 100px bottom padding */
+  font-size: 1em !important;          /* bump base font from 0.88em */
 }
+/* Date heading — make it large and bold for TV visibility */
 h2 {
   color: #8dc63f;
+  font-size: 1.8em !important;
+  font-weight: 700 !important;
+  margin-bottom: 14px !important;
 }
-ul.sessions > li div.name {
-  color: #ffffff !important;        /* !important needed to override sched.co base styles */
+/* Session list items — tighten vertical spacing */
+ul.sessions > li.session {
+  margin-bottom: 12px !important;
 }
+/* Time column — slightly narrower to give more room to titles */
 ul.sessions > li div.time {
   color: #8dc63f;
+  font-size: 22px !important;
+  font-weight: 600 !important;
+  min-width: 15% !important;
+  max-width: 15% !important;
 }
+/* Talk title bar */
+ul.sessions > li div.name {
+  color: #ffffff !important;
+  font-size: 22px !important;
+  font-weight: 600 !important;
+  min-width: 75% !important;          /* wider to reduce truncation */
+  max-width: 75% !important;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-shadow: none !important;        /* remove light-theme white text shadow */
+  background-image: none !important;   /* remove sched.co gradient texture */
+  border-radius: 4px;
+}
+/* Speaker / venue bar */
 ul.sessions > li div.speaker {
   background-color: #551f7a;
   color: #ffffff;
+  font-size: 18px !important;
+  min-width: 75% !important;
+  max-width: 75% !important;
 }
 ul.sessions > li div.speaker > span.venue {
   background-color: #551f7a;
   color: #d4542c;
 }
-
-/*  handle long session names */
-ul.sessions > li div.name {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+.name {
+  cursor: auto;
 }
