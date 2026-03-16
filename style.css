@@ -5,20 +5,20 @@ html {
     cursor: auto;
 }
 body {
-    background-color: #000000;
+    background-color: #f1d49c;
     color: white;
 }
 h2 {
-    color: #be202e; /* red */
+    color: #3494af; /* blue */
 }
 ul.sessions > li div.time {
-    color: #d0cbc0; /* white */
+    color: #3494af;
 }
 ul.sessions > li div.speaker {
-    background-color: #000000;
-    color: #d0cbc0; /* white */
+    background-color: #f1d49c;
+    color: #000000;
 }
 ul.sessions > li div.speaker > span.venue {
-    background-color: #000000;
-    color: #be202e; /* red */
+    background-color: #f1d49c;
+    color: #b74734; /* orange */
 }

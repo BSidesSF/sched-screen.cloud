@@ -4,7 +4,19 @@ var limit = 200;
 
 var venueList = "global";
 
-var venueFilter = ["AMC Theatre 11", "AMC Theatre 12", "AMC Theatre 13", "AMC Theatre 14", "AMC Theatre 15", "AMC Theatre 9"];
+var venueFilter = [
+    "AMC Theatre 11",
+    "AMC Theatre 13",
+    "AMC Theatre 14",
+    "AMC Theatre 15",
+    "AMC Theatre 09",
+    "AMC Theatre 01",
+    "AMC Theatre 02",
+    "AMC Theatre 03",
+    "AMC Theatre 06",
+    "AMC Theatre 07",
+    "AMC IMAX",
+];
 //var startDate = moment("2023-04-23");
 var maxDisplayLength = moment.duration(3.5, 'hours');
 
