@@ -1,24 +1,41 @@
+/* 
+2026 Colors 
+* #8dc63f green
+* #d4542c orange
+* #000000 black
+* #551f7a purple
+*/
 html {
-    overflow:hidden;
+  overflow: hidden;
 }
 .name {
-    cursor: auto;
+  cursor: auto;
 }
 body {
-    background-color: #f1d49c;
-    color: white;
+  background-color: #000000;
+  color: white;
 }
 h2 {
-    color: #3494af; /* blue */
+  color: #8dc63f;
+}
+ul.sessions > li div.name {
+  color: #ffffff !important;        /* !important needed to override sched.co base styles */
 }
 ul.sessions > li div.time {
-    color: #3494af;
+  color: #8dc63f;
 }
 ul.sessions > li div.speaker {
-    background-color: #f1d49c;
-    color: #000000;
+  background-color: #551f7a;
+  color: #ffffff;
 }
 ul.sessions > li div.speaker > span.venue {
-    background-color: #f1d49c;
-    color: #b74734; /* orange */
+  background-color: #551f7a;
+  color: #d4542c;
+}
+
+/*  handle long session names */
+ul.sessions > li div.name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
